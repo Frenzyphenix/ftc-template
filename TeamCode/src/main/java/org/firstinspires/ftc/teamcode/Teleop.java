@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.internal.camera.delegating.DelegatingCaptureSequence;
+
 /*
  * Sample teleop opmode
  *
@@ -23,6 +25,8 @@ public class Teleop extends LinearOpMode {
         waitForStart();
         //wait for you to press start
 
+        double drivepower = 0.8;
+        boolean slowmode = true;
 
 
         // run until the end of the match (driver presses STOP)
@@ -38,8 +42,36 @@ public class Teleop extends LinearOpMode {
             // - This uses basic math to combine motions and is easier to drive straight.
             double drive = gamepad1.left_stick_y;
             double turn  =  -gamepad1.right_stick_x;
-            leftPower    = Range.clip(drive + turn, -0.8, 0.8) ;
-            rightPower   = Range.clip(drive - turn, -0.8, 0.8) ;
+
+            if (gamepad1.left_trigger_pressed) {
+                if (slowmode == false) {
+                    slowmode = true;
+                }
+
+                if (slowmode == true) {
+                    slowmode = false;
+                }
+            }
+
+            if (slowmode == true)    {
+                drivepower = 0.2;
+            }
+             if (slowmode == false)  {
+                 drivepower = 0.8;
+             }
+             
+
+
+
+            leftPower    = Range.clip(drive + turn, -drivepower, drivepower) ;
+            rightPower   = Range.clip(drive - turn, -drivepower, drivepower) ;
+
+
+
+
+
+
+
 
             robot.left.setPower(leftPower);
             robot.right.setPower(rightPower);
@@ -52,7 +84,7 @@ public class Teleop extends LinearOpMode {
             }
 
             double arm = gamepad2.left_stick_y/2;
-            double armpower = Range.clip(arm, -1,0.75);
+            double armpower = Range.clip(arm, -1,1);
             robot.arm.setPower(armpower);
 
             if (gamepad2.left_trigger_pressed) {
@@ -60,7 +92,7 @@ public class Teleop extends LinearOpMode {
             }
 
             if (gamepad2.right_trigger_pressed) {
-                robot.clawspin.setPosition(.27);
+                robot.clawspin.setPosition(.238);
             }
 
 

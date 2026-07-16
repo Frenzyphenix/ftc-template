@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -52,8 +53,8 @@ public class Hardware {
         
     }
     public void closeClaw() {
-        clawleft.setPosition(.5);
-        clawright.setPosition(.38);
+        clawleft.setPosition(.55);
+        clawright.setPosition(.33);
 
     }
 }
