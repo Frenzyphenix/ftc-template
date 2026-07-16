@@ -59,7 +59,7 @@ public class Teleop extends LinearOpMode {
              if (slowmode == false)  {
                  drivepower = 0.8;
              }
-             
+
 
 
 
@@ -87,12 +87,15 @@ public class Teleop extends LinearOpMode {
             double armpower = Range.clip(arm, -1,1);
             robot.arm.setPower(armpower);
 
+            double clawdegree = .238;
+
+
             if (gamepad2.left_trigger_pressed) {
                 robot.clawspin.setPosition(.572);
             }
 
             if (gamepad2.right_trigger_pressed) {
-                robot.clawspin.setPosition(.238);
+                robot.clawspin.setPosition(clawdegree);
             }
 
 
