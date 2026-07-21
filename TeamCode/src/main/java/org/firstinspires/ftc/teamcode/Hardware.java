@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.animation.RectEvaluator;
+
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -33,6 +35,9 @@ public class Hardware {
 
         left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        left.setDirection(DcMotorSimple.Direction.REVERSE);
+        right.setDirection(DcMotorSimple.Direction.REVERSE);
 
         clawleft = hwMap.get(Servo.class, "clawleft");
         clawright = hwMap.get(Servo.class, "clawright");

@@ -12,9 +12,7 @@ import org.firstinspires.ftc.robotcore.internal.camera.delegating.DelegatingCapt
  * Sample teleop opmode
  *
  */
-
-
-
+@TeleOp(name = "Cool teleop")
 public class Teleop extends LinearOpMode {
 
     public Hardware robot;
@@ -40,16 +38,22 @@ public class Teleop extends LinearOpMode {
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
 
-            double drivepower = 0.8;
+            double drivepower = 1;
 
-            double drive = gamepad1.left_stick_y;
-            double turn  =  -gamepad1.right_stick_x;
+            double drive = -gamepad1.left_stick_y;
+            double turn  =  gamepad1.right_stick_x;
 
             if (gamepad1.b) {
-                 drive = gamepad1.left_stick_y/3;
-                 turn  =  -gamepad1.right_stick_x/3;
+                 drive = -gamepad1.left_stick_y/3;
+                 turn  =  gamepad1.right_stick_x/3;
 
             }
+
+            telemetry.addData("left curr", robot.left.getCurrentPosition());
+            telemetry.addData("right curr", robot.right.getCurrentPosition());
+            telemetry.addData("left target", robot.left.getTargetPosition());
+            telemetry.addData("right target", robot.left.getTargetPosition());
+            telemetry.update();
 
 
 

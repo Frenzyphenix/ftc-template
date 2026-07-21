@@ -15,7 +15,14 @@ public class Auto extends LinearOpMode {
         robot.init();
         waitForStart();
 
-        goforward(0.4, 300);
+        goforward(0.2, 2000);
+        while (opModeIsActive()) {
+            telemetry.addData("left curr", robot.left.getCurrentPosition());
+            telemetry.addData("right curr", robot.right.getCurrentPosition());
+            telemetry.addData("left target", robot.left.getTargetPosition());
+            telemetry.addData("right target", robot.left.getTargetPosition());
+            telemetry.update();
+        }
     }
 
      public void goforward(double power, int ticks) {
@@ -24,6 +31,9 @@ public class Auto extends LinearOpMode {
 
         robot.left.setTargetPosition(ticks);
         robot.right.setTargetPosition(ticks);
+
+        robot.left.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.right.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         robot.left.setPower(power);
         robot.right.setPower(power);
