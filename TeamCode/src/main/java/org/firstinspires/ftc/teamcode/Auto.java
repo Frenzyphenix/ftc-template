@@ -4,48 +4,44 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-@Autonomous(name= "DVEGA Definetly very extremely good auto V1")
+@Autonomous(name= "DVEGA")
 public class Auto extends LinearOpMode {
     public Hardware robot;
     //run op mode waits for you to press innit
 
-
-    public void turnleft(double power) {
-        robot.right.setPower(power);
-        robot.left.setPower(-power);
-    }
-    public void turnright(double power) {
-        robot.right.setPower(-power);
-        robot.left.setPower(power);
-    }
-    public void foward(double power) {
-        robot.right.setPower(power);
-        robot.left.setPower(power);
-
-    }
     public void runOpMode() throws InterruptedException {
         robot = new Hardware(hardwareMap);
         //wait for start :O
         robot.init();
         waitForStart();
 
-        robot.closeClaw();
-        robot.arm.setPower(1);
-        sleep(5000);
+        goforward(0.4, 300);
+    }
 
-        robot.right.setPower(1);
-        robot.left.setPower(1);
-        sleep(2000);
+     public void goforward(double power, int ticks) {
+        robot.left.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.right.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        robot.right.setPower(-1);
-        robot.left.setPower(1);
-        sleep(5000);
-        robot.arm.setPower(-1);
-        sleep(5000);
+        robot.left.setTargetPosition(ticks);
+        robot.right.setTargetPosition(ticks);
 
-        robot.openClaw();
+        robot.left.setPower(power);
+        robot.right.setPower(power);
+
     }
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
 //192.168.43.1

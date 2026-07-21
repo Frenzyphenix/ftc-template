@@ -13,7 +13,7 @@ import org.firstinspires.ftc.robotcore.internal.camera.delegating.DelegatingCapt
  *
  */
 
-@TeleOp(name="Lightning McQueen's brain")
+
 
 public class Teleop extends LinearOpMode {
 
@@ -25,8 +25,7 @@ public class Teleop extends LinearOpMode {
         waitForStart();
         //wait for you to press start
 
-        double drivepower = 0.8;
-        boolean slowmode = true;
+
 
 
         // run until the end of the match (driver presses STOP)
@@ -40,25 +39,19 @@ public class Teleop extends LinearOpMode {
 
             // POV Mode uses left stick to go forward, and right stick to turn.
             // - This uses basic math to combine motions and is easier to drive straight.
+
+            double drivepower = 0.8;
+
             double drive = gamepad1.left_stick_y;
             double turn  =  -gamepad1.right_stick_x;
 
-            if (gamepad1.left_trigger_pressed) {
-                if (slowmode == false) {
-                    slowmode = true;
-                }
+            if (gamepad1.b) {
+                 drive = gamepad1.left_stick_y/3;
+                 turn  =  -gamepad1.right_stick_x/3;
 
-                if (slowmode == true) {
-                    slowmode = false;
-                }
             }
 
-            if (slowmode == true)    {
-                drivepower = 0.2;
-            }
-             if (slowmode == false)  {
-                 drivepower = 0.8;
-             }
+
 
 
 
@@ -87,15 +80,14 @@ public class Teleop extends LinearOpMode {
             double armpower = Range.clip(arm, -1,1);
             robot.arm.setPower(armpower);
 
-            double clawdegree = .238;
 
 
             if (gamepad2.left_trigger_pressed) {
-                robot.clawspin.setPosition(.572);
+                robot.clawspin.setPosition(.595);
             }
 
             if (gamepad2.right_trigger_pressed) {
-                robot.clawspin.setPosition(clawdegree);
+                robot.clawspin.setPosition(.238);
             }
 
 
